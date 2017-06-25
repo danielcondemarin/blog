@@ -3,16 +3,16 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: devving
+title: d' dev panda ヽ(￣(ｴ)￣)ﾉ
 subtitle:
 description:
 author: Daniel Conde
-language:
+language: default
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://devving.com
+url: https://danielcondemarin.github.io/
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -68,4 +68,8 @@ theme: apollo
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: heroku
+  type: git
+  repo: https://github.com/danielcondemarin/danielcondemarin.github.io.git
+  branch: master
+  name: danielcondemarin
+  email: danielconde9@gmail.com
