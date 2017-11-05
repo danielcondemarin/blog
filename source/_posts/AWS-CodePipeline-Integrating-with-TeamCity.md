@@ -1,20 +1,20 @@
 ---
 title: AWS CodePipeline - Integrating with TeamCity
-date: 2017-11-05 21:14:08
+date: 2017-11-05 22:00:37
 tags:
 ---
 
 
-AWS CodePipeline is an excellent tool for orchestrating your deployments in the cloud. It provides out of the box integration with  CI Providers such as CodeBuild, Jenkins and Solano CI.Other providers can be configured as well, like TeamCity, and that's the aim of this post.
+AWS CodePipeline is an excellent tool for orchestrating your deployments in the cloud. It provides out of the box integration with  CI Providers such as CodeBuild, Jenkins and Solano CI. Other providers can be configured as well, like TeamCity, and that's the aim of this post.
 
 In order to understand the extensibility point in CodePipeline that allows to plugin a custom action like a TeamCity Build, read http://docs.aws.amazon.com/codepipeline/latest/userguide/actions-create-custom-action.html which explains in depth custom action types in CodePipeline.
 
-We will be setting up a deployment pipeline to automate releases of a simple nodejs app hosted in GitHub. To provision the Pipeline, we will use CloudFormation, which means you can provision your deployment pipeline in an automated fashion. 
+We will be setting up a deployment pipeline to automate releases of a simple nodejs app hosted in GitHub. To provision the Pipeline, we will use CloudFormation, which means you can provision it in an automated fashion. 
 
 So, let's start by creating our project folder, let's call it `node-app-devops`. Next, create a directory inside the project called `templates`, which is where your cloud formation template will be, let's name it `deployment-pipeline.yaml`.
 
 
-Open `deployment-pipeline.yaml` in an editor of your preference and let's start by adding a Description to your template, and the Parameters, in order to add even more flexibility when we provision the pipeline.
+Open `deployment-pipeline.yaml` in an editor of your preference and let's start by adding a **Description** to your template, and the **Parameters**.
 
 ```
 Description: >
@@ -52,15 +52,14 @@ Parameters:
         Type: String
 ```
 
+`GitHubOwner` would be simply your GitHub username, `GitHubRepo` the name of the repository and `GitHubBranch` is the branch where CodePipeline will fetch from. `GitHubOAuthToken` can be created if you don't have one already, by going to https://github.com/settings/tokens.
 
-`GitHubOwner` would be simply your GitHub username. `GitHubRepo` the name of the repository, in this case the node app and `GitHubBranch` is the branch where CodePipeline will fetch from. `GitHubOAuthToken` can be created if you don't have one already, by going to https://github.com/settings/tokens.
-
-So far, it should be looking like this for you:
+So far, it should be looking like this:
 
 ![Description And Parameters](https://res.cloudinary.com/danielcondemarin/image/upload/v1509871274/AWS-CodePipeline-Integrating-with-TeamCity/description_and_parameters.png)
 
 
-Next, we will start working on the `Resources` section, starting with the IAM Role the Pipeline will be using. The role will provide access to an S3 Bucket, which will store the build artifacts produced by TeamCity.
+Next, let's work on the `Resources` section, starting with the IAM Role used by the Pipeline. The role will provide access to an S3 Bucket, which will store the artifacts.
 
 ```
 Resources:
@@ -97,12 +96,10 @@ Resources:
 
 ```
 
-Note, how in RoleName I'm using `cpsr-${AWS::StackName}`, as convention cpsr stands for the initials of the Resource being provisioned, and we append the Pseudo Parameter `AWS::StackName` to have a more unique name which can also be easily associated to the Stack.
-In the `Policies` there will be one that provides the S3 access needed by the Pipeline. You will see how any artifact passed down to TeamCity or passed up to the Pipeline will use S3 as intermediate storage. `ArtifactBucket` is simply the S3 bucket that will be used by the Stack.
+Note, how in **RoleName** I'm using `cpsr-${AWS::StackName}`, as convention **cpsr** stands for the initials of the Resource being provisioned, and we append the Pseudo Parameter `AWS::StackName` to have a more unique name which can also be easily associated to the Stack.
+In the `Policies` there will be one that provides the S3 access needed by the Pipeline.`ArtifactBucket` is simply the S3 bucket that will be used as intermediate storage between TeamCity and CodePipeline.
 
 Next, let's do the actual integration with TeamCity on our pipeline. For that, we need a [Custom Action Type](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-codepipeline-customactiontype.htm):
-
-
 
 ```
 
@@ -147,8 +144,7 @@ Next, let's do the actual integration with TeamCity on our pipeline. For that, w
 
 ```
 
-Make sure the names passed in the ConfigurationProperties, such as TeamCityServerURL, BuildConfigurationID match the variables used in both templates EntityUrlTemplate and ExecutionUrlTemplate. Also, note that ActionID is the value that will link TeamCity together with CodePipeline, but more on that later.
-
+Note that ActionID is the value that will link TeamCity together with CodePipeline, but more on that later.
 
 Lastly, let's bring all the pieces together and implement the actual CodePipeline:
 
@@ -196,16 +192,15 @@ Lastly, let's bring all the pieces together and implement the actual CodePipelin
 
 ```
 
-I know what you're thinking, there is a missing piece, which is actually deploying your code somewhere right? :) Well the purpose of the post is to show how to integrate with TeamCity your CodePipeline, so we'll keep it simple, and maybe have another post later on how to integrate with other services for deploying.
+I know what you're thinking, there is a missing piece, which is the deployment stage right? :) Well the purpose of the post is to show how to integrate with TeamCity your CodePipeline, so we'll keep it simple, and maybe have another post later on how to integrate with other services for deploying.
 
-Let's now create the BuildConfiguration in TeamCity for the app, but first, we need to install a plugin which will be responsible for pulling any build jobs provided by the Pipeline. The plugin can be found [here](https://confluence.jetbrains.com/display/TW/AWS+CodePipeline+Plugin)
-If you've never installed a plugin before on TeamCity, just go to Administration > Plugins List and click on Upload plugin zip. You can get the plugin zip from the link above. You might need to restart the TeamCity server after uploading the plugin. For me it looks like this after I installed it:
+Let's now create the BuildConfiguration in TeamCity for the app, but first, we need to install a plugin which will be responsible for pulling any build jobs provided by the Pipeline. The plugin can be found [here](https://confluence.jetbrains.com/display/TW/AWS+CodePipeline+Plugin). If you've never installed a plugin before on TeamCity, just go to **Administration > Plugins List** and click on **Upload plugin zip**. You can get the plugin zip from the link above. You might need to restart the TeamCity server after uploading the plugin. Should look this after installing it:
 
 ![TeamCity Plugins](https://res.cloudinary.com/danielcondemarin/image/upload/v1509908370/AWS-CodePipeline-Integrating-with-TeamCity/teamcityplugins.png)
 
 Note how I've got a plugin for better nodejs integration with TeamCity, that will come handy when we configure our build. You can find it [here](https://github.com/jonnyzzz/TeamCity.Node), install it like you did for the previous one.
 
-Create a new Project in TeamCity, and a build configuration for it. Also, skip the VCS setup, since our repository will come from CodePipeline instead of a version control provider. I named my project `Demo App`, and the build configuration `DemoAppBuild`. First, we need to configure a Trigger, which will execute the build configuration whenever the Pipeline needs it to. If you've installed correctly the CodePipeline plugin for TeamCity, you should be able to configure the trigger like this:
+Create a new Project in TeamCity, and a build configuration, skip the VCS setup, since our repository will come from CodePipeline instead of a version control provider. I named my project `Demo App`, and the build configuration `DemoAppBuild`. First, we need to configure a Trigger, which will execute the build configuration whenever the Pipeline needs it to. If you've installed correctly the CodePipeline plugin for TeamCity, you should be able to configure the trigger like this:
 ![CodePipeline Trigger](https://res.cloudinary.com/danielcondemarin/image/upload/v1509909920/AWS-CodePipeline-Integrating-with-TeamCity/codepipelinetrigger.png)
 Use your own AWS Access Keys. Also, in ActionID just put anything meaningful, this will be the value that will tie together your build configuration with the Pipeline in AWS.
 
@@ -213,7 +208,7 @@ Now let's configure the Build Steps. I have 5 build steps:
 
 ![Build Steps](https://res.cloudinary.com/danielcondemarin/image/upload/v1509910295/AWS-CodePipeline-Integrating-with-TeamCity/buildsteps.png).
 
-Steps 1, 3 and 4 can be configured easily by using the johnnyzzz plugin mentioned above, so I won't go in detail for these. Now, let's have a look at step `2. Copy Repository To Working Directory`. This is a command line script which will pickup the repository dropped by CodePipeline and copy it to the build working directory:
+Steps 1, 3 and 4 can be configured easily by using the jonnyzzz plugin mentioned above, so I won't go in detail for these. Now, let's have a look at step `2. Copy Repository To Working Directory`. This is a command line script which will pickup the repository dropped by CodePipeline and copy it to the build working directory:
 
 ```
 #!/bin/bash
