@@ -2,6 +2,8 @@
 title: SSH Public Key authentication to your Edison
 date: 2017-06-25 09:43:38
 tags:
+- Intel Edison
+- SSH Public Key
 ---
 
 I believe the best developers are the laziest ones, those who *do more by doing less*. That includes not having to type in your password every time you want to login to your **Intel Edison**.

@@ -2,6 +2,11 @@
 title: AWS Route53 - DNS Whitelisting using Geolocation Routing
 date: 2017-10-07 14:41:25
 tags:
+- Route53
+- Geolocation
+- AWS
+- Client Subnet
+- DNS Blacklist
 ---
 
 Assumptions:  Basic knowledge of AWS Route53
