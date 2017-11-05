@@ -1,7 +1,9 @@
 ---
 title: AWS CodePipeline - Integrating with TeamCity
+date: 2017-11-05 21:14:08
 tags:
 ---
+
 
 AWS CodePipeline is an excellent tool for orchestrating your deployments in the cloud. It provides out of the box integration with  CI Providers such as CodeBuild, Jenkins and Solano CI.Other providers can be configured as well, like TeamCity, and that's the aim of this post.
 
