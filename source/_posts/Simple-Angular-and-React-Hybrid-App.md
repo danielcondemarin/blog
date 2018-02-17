@@ -56,7 +56,7 @@ Then set the component for ngReact to use like this:
 
 `myApp.value('DummyComponent', window.ReactEntry.DummyComponent);`
 
-With that done we can render DummyComponent in home.html using a custom directive provided by ngReact:
+Now we can render DummyComponent in home.html using a custom directive provided by ngReact:
 
 <react-component name="DummyComponent"></react-component>
 
