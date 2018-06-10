@@ -2,6 +2,10 @@
 title: AWS CodePipeline - Integrating with TeamCity
 date: 2017-11-05 22:00:37
 tags:
+- AWS
+- Teamcity
+- Continuous Delivery
+- CodePipeline
 ---
 
 
