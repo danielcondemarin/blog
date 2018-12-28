@@ -4,9 +4,9 @@ tags:
 ---
 
 Many companies and engineers today appreciate the value provided by pair programming. It brings benefits such as **increased code quality**, **less defects**, **knowledge transfer**, **improved team communication** to name a few.
-This post isn't about the perks of pair programming though, instead, I'll be writing about some of the challenges we can encounter as individuals during pairing and hopefully give some tips to help you overcome these. We'll also see how important Emotional Intelligence is to pair programming, and how we can improve our skills in this area, by just increasing our awareness.
+This post isn't about the perks of pair programming though, instead, I'll be writing about some of the challenges we can encounter as individuals during pairing and hopefully give some tips to help you overcome these. We'll see how important Emotional Intelligence is to pair programming, and how we can improve our skills in this area, by just increasing our awareness.
 
-As software engineers, we do amazing things, we build impressive applications every day and we should be proud of that. Unfortunately one skill that we don't get taught or consciously improve is our Emotional Intelligence, which I think is critical for good pair programming.
+Unfortunately, as software engineers, one skill that we don't get taught or consciously improve on is our Emotional Intelligence, which I think is critical for good pair programming.
 
 I've been particularly interested in this topic over the last year or so, and I've recently completed a great book by Daniel Goleman titled: _Emotional Intelligence: Why It Can Matter More Than IQ_. Goleman synthesizes Emotional Intelligence in the following 4 pillars:
 
@@ -21,7 +21,7 @@ I believe that by improving our Emotional Intelligence skills we can become much
 
 Self-awareness is about knowing what we're feeling and why we're feeling it. Is a monitor of our own thoughts and feelings.
 
-During pairing, exchanges of opposite views happen all the time. One of these exchanges can lead to heated arguments, for example, you both are very opinionated about how you should structure directories in your project, or maybe what framework to use for unit testing, etc. While is important to have these discussions, which ultimately could lead to a wonderful solution, is also important to **notice** your own first signs of negative emotions, especially when the argument escalates: anxiety, frustration, stress, etc. Being self aware in these moments means that you will be better off at reacting and doing something about it, such as **taking a break**, going for a cup of tea or maybe just switching topics for 10 minutes and talk about the fun stuff you've been up to lately. Acting on time in these situations can stop the build up of stress and bring it back down.
+During pairing, exchanges of opposite views happen all the time. One of these exchanges can lead to heated arguments, for example, you both are very opinionated about how you should structure directories in your project, or maybe what framework to use for unit testing, etc. Whilst is important to have these discussions, which ultimately could lead to a wonderful solution, is also important to **notice** your own first signs of negative emotions, especially when the argument escalates: anxiety, frustration, stress, etc. Being self aware in these moments means that you will be better off at reacting and doing something about it, such as **taking a break**, going for a cup of tea or maybe just switching topics for 10 minutes and talk about the fun stuff you've been up to lately. Acting on time in these situations can stop the build up of stress and bring it back down.
 
 ### Self-Management
 
@@ -40,6 +40,6 @@ Remember what I said earlier about monitoring your _own_ first signs of negative
 
 ### Social / Relationship Skills
 
-**How do I respond to other people’s emotions?**, **How good am I in attuning to other's emotions?** These are abilities that conform the basis of good social skills.
+Effective relationship skills rely on the 3 domains above and if you've mastered them, as a result you will likely have good relationship skills. If we spend most of the time pairing at work, is probably wise to have healthy relationships with your colleague engineers, and whilst it can happen naturally, it could also go wrong. If at least we're aware and consciously work on these "soft skills" we can have a better time doing our work and also produce better quality.
 
-Being able to build healthy relationships with the people we pair with is very important. As a result, you will find smoother pairing experiences.
+### Final Thoughts and Tips
